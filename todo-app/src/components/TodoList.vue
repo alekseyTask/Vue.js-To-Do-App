@@ -25,7 +25,7 @@
         <comp :foo="bar" @update:foo="val => bar = val"></comp>
 
     -->
-    <todo v-on:DeleteTodoEvent="deleteTodo" v-on:CompleteTodoEvent="completeTodo" v-for="(buffTodo,index) in todos" v-bind:todo="buffTodo" :key="index" :todo.sync="todo"></todo>
+    <todo v-on:DeleteTodoEvent="deleteTodo" v-on:CompleteTodoEvent="completeTodo" v-for="(buffTodo,index) in todos" v-bind:todo="buffTodo" :key="index"></todo>
   </div>
 </template>
 

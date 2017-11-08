@@ -23,7 +23,7 @@
              в нашем случае идет: Подписка на пользовательское событие в дочернем элементе, обработчик вызываеться когда дочерний элимент вызывает
              т.е когда компонент CreateTodo вызовет create-todo (событие). А подписываем мы методы которые определены в export default через их имя
       -->
-      <TodoList v-bind:todos="todos"></TodoList>
+      <TodoList v-bind:todos="DataTodos"></TodoList>
       <CreateTodo v-on:CreateTodoEvent="createTodo"></CreateTodo>
     </div>
   </div>
@@ -47,7 +47,7 @@ export default {
   // связывает этот масивчик с полем компанента (<TodoList v-bind:todos="todos"></TodoList>)
   data() {
     return {
-      todos: [{
+      DataTodos: [{
         title: 'Todo A',
         project: 'Project A',
         done: false,
@@ -71,7 +71,7 @@ export default {
     // этот метод мы подписываем на событие create-todo
     // <create-todo v-on:create-todo="createTodo"></create-todo>
     createTodo(newTodo) {
-      this.todos.push(newTodo);
+      this.DataTodos.push(newTodo);
     },
   },
 };
