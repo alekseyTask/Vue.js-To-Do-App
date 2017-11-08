@@ -1,16 +1,20 @@
 <template>
   <div class='ui centered card'>
+    <!-- v-show="!isEditing"  true чтобы показывало и false чтоб непоказовало (разворачиваеться в css свойство dysplay:none вроде) -->
     <div class="content" v-show="!isEditing">
       <div class='header'>
+          <!-- задает данные для этого итема -->
           {{ todo.title }}
       </div>
       <div class='meta'>
           {{ todo.project }}
       </div>
       <div class='extra content'>
+          <!-- v-on:click="showForm" вешает функцию (showForm) на клик по этому спану, функция должна быть определена в export default -> methods -->
           <span class='right floated edit icon' v-on:click="showForm">
           <i class='edit icon'></i>
         </span>
+        <!-- v-on:click="deleteTodo(todo)" если подвешываемая функция должна принимать в себя параметр и нам надо его передать то делаем это -->
         <span class='right floated trash icon' v-on:click="deleteTodo(todo)">
          <i class='trash icon'></i>
         </span>
@@ -20,6 +24,7 @@
       <div class='ui form'>
         <div class='field'>
           <label>Title</label>
+          <!-- Вы можете использовать директиву v-model для двунаправленного связывания данных с элементами форм input и textarea. -->
           <input type='text' v-model="todo.title" >
         </div>
         <div class='field'>
