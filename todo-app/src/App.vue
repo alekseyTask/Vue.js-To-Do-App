@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <div class='content'>
-      <todo-list v-bind:todos="todos"></todo-list>
+      <TodoList v-bind:todos="todos"></TodoList>
     </div>
   </div>
 </template>
