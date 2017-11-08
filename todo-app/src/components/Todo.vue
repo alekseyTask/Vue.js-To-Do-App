@@ -64,10 +64,10 @@
         // вот так происходит вызов события
         // первый параметр это название или имя события
         // воторой,  передоваемый параметр
-        this.$emit('delete-todo', todo);
+        this.$emit('DeleteTodoEvent', todo);
       },
       completeTodo(todo) {
-        this.$emit('complete-todo', todo);
+        this.$emit('CompleteTodoEvent', todo);
       },
     },
   };
