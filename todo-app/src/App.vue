@@ -24,7 +24,7 @@
              т.е когда компонент CreateTodo вызовет create-todo (событие). А подписываем мы методы которые определены в export default через их имя
       -->
       <TodoList v-bind:todos="todos"></TodoList>
-      <create-todo v-on:create-todo="createTodo"></create-todo>
+      <CreateTodo v-on:CreateTodoEvent="createTodo"></CreateTodo>
     </div>
   </div>
 </template>
