@@ -2,9 +2,5 @@
     "extends": ["airbnb-base", "rallycoding"],
     "plugins": [
         "import"
-    ],
-    "eslint.validate": [
-        { "language": "vue", "autoFix": true }
-    ],
-    "eslint.autoFixOnSave": true
+    ]
 }
