@@ -5,25 +5,15 @@
     <p>Pending Tasks: {{todos.filter(todo => {return todo.done === false}).length}}</p>
     <!--
       тут мы подвесили методы на события которые делают дочернии сомпонентыю, отметим что названия методов невключают параметры т.к нечего нам туда передовать ненадо
-      v-on:delete-todo="deleteTodo" v-on:complete-todo="completeTodo"
+      v-on:DeleteTodoEvent="deleteTodo" v-on:CompleteTodoEvent="completeTodo"
 
-      v-bind:todo="todo" свяхываем todo (этот todo получаеться при проходе todos и являеться элиментом todo (текущим)) с todo компонента todo
+      v-bind:todo="buffTodo" свяхываем buffTodo (этот buffTodo получаеться при проходе todos и являеться элиментом todo (текущим)) с todo компонента todo
 
-      v-for="(todo,index) in todos" :key="index" это фигня обойдет все элементы в массиве todos и выведит их.
-      Оно работает анологично форичу (если дословно то мы проходимся по todos используя индекс, текущий элимент храним в todo)
-      в качестве буферного элимента выступает todo, в последствии он и связываеться (см комент выше)  v-bind:todo="todo"
+      v-for="(buffTodo,index) in todos" :key="index" это фигня обойдет все элементы в массиве todos и выведит их.
+      Оно работает анологично форичу (если дословно то мы проходимся по todos используя индекс, текущий элимент храним в buffTodo)
+      в качестве буферного элимента выступает buffTodo, в последствии он и связываеться (см комент выше)  v-bind:todo="buffTodo"
 
       :key="index" В версиях 2.2.0+, при использовании v-for на компонентах теперь обязательно требуется указывать key.
-      
-      :todo.sync="todo"  это двухсторонняя привязка данных т.е данный компонент может изменять входные данные опасная фича т.к делает все запутанной
-      в процессе фреймворка ее пару раз правили и по итогу вот что:
-       В версии 2.3.0+ мы снова ввели модификатор .sync для входных данных, но на этот раз это просто синтаксический сахар, 
-       который автоматически преобразуется в дополнительный обработчик v-on:
-      Следующее
-        <comp :foo.sync="bar"></comp>
-      будет преобразовано в:
-        <comp :foo="bar" @update:foo="val => bar = val"></comp>
-
     -->
     <todo v-on:DeleteTodoEvent="deleteTodo" v-on:CompleteTodoEvent="completeTodo" v-for="(buffTodo,index) in todos" v-bind:todo="buffTodo" :key="index"></todo>
   </div>
