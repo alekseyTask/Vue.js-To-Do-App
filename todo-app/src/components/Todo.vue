@@ -61,6 +61,9 @@
         this.isEditing = false;
       },
       deleteTodo(todo) {
+        // вот так происходит вызов события
+        // первый параметр это название или имя события
+        // воторой,  передоваемый параметр
         this.$emit('delete-todo', todo);
       },
       completeTodo(todo) {

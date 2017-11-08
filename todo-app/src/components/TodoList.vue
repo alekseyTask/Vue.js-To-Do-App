@@ -4,7 +4,7 @@
     <p>Completed Tasks: {{todos.filter(todo => {return todo.done === true}).length}}</p>
     <p>Pending Tasks: {{todos.filter(todo => {return todo.done === false}).length}}</p>
     <!--
-      тут мы подвесили методы на события которые делают дочернии сомпоненты
+      тут мы подвесили методы на события которые делают дочернии сомпонентыю, отметим что названия методов невключают параметры т.к нечего нам туда передовать ненадо
       v-on:delete-todo="deleteTodo" v-on:complete-todo="completeTodo"
 
       v-bind:todo="todo" свяхываем todo (этот todo получаеться при проходе todos и являеться элиментом todo (текущим)) с todo компонента todo
