@@ -1,8 +1,8 @@
 <template>
   <div>
     <!-- Тут выводиться количество сделанных тасков и несделанных .filter это стандарнтный метод js аля LINQ-->
-    <p>Completed Tasks: {{todos.filter(todo => {return todo.done === true}).length}}</p>
-    <p>Pending Tasks: {{todos.filter(todo => {return todo.done === false}).length}}</p>
+    <p>Completed Tasks: {{complitedTasks}}</p>
+    <p>Pending Tasks: {{pendingTasks}}</p>
     <!--
       тут мы подвесили методы на события которые делают дочернии сомпонентыю, отметим что названия методов невключают параметры т.к нечего нам туда передовать ненадо
       v-on:DeleteTodoEvent="deleteTodo" v-on:CompleteTodoEvent="completeTodo"
@@ -21,25 +21,35 @@
 
 <script type = "text/javascript" >
 
+
 import Todo from './Todo';
+import store from '../store/store';
 
 export default {
   // props это атрибут который указывает входные параметры
   // для передачи информации из родительского компонента.
   // в нашем случае это переменная todos,
   // именно через неё идет передача данных из родительского компонента
-  props: ['todos'],
   components: {
     Todo,
   },
+  computed: {
+    todos() {
+      return store.getters.results;
+    },
+    complitedTasks() {
+      return store.getters.complitedTasks;
+    },
+    pendingTasks() {
+      return store.getters.pendingTasks;
+    },
+  },
   methods: {
     deleteTodo(todo) {
-      const todoIndex = this.todos.indexOf(todo);
-      this.todos.splice(todoIndex, 1);
+      store.dispatch('delToDo', todo);
     },
     completeTodo(todo) {
-      const todoIndex = this.todos.indexOf(todo);
-      this.todos[todoIndex].done = true;
+      store.dispatch('cmpToDo', todo);
     },
   },
 };

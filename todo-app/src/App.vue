@@ -23,7 +23,7 @@
              в нашем случае идет: Подписка на пользовательское событие в дочернем элементе, обработчик вызываеться когда дочерний элимент вызывает
              т.е когда компонент CreateTodo вызовет CreateTodoEvent (событие). А подписываем мы методы которые определены в export default через их имя
       -->
-      <TodoList v-bind:todos="DataTodos"></TodoList>
+      <TodoList></TodoList>
       <CreateTodo v-on:CreateTodoEvent="createTodo"></CreateTodo>
     </div>
   </div>
@@ -32,8 +32,10 @@
 <script>
 // тут происходит импорт компонентов
 // вначале идет то как мы именуем импортируемый компанент а потом откуда мы его импортим
+
 import TodoList from './components/TodoList';
 import CreateTodo from './components/CreateTodo';
+import store from './store/store';
 
 export default {
   name: 'app',
@@ -42,36 +44,12 @@ export default {
     TodoList,
     CreateTodo,
   },
-  // вся эта хрень как я понял косаеться подключенных компонентов, и их данных
-  // тут пишеться заполнение данных, мы просто заполняем массив делл а v-bind:todos="DataTodos"
-  // связывает этот масивчик с полем компанента (<TodoList v-bind:todos="DataTodos"></TodoList>)
-  data() {
-    return {
-      DataTodos: [{
-        title: 'Todo A',
-        project: 'Project A',
-        done: false,
-      }, {
-        title: 'Todo B',
-        project: 'Project B',
-        done: true,
-      }, {
-        title: 'Todo C',
-        project: 'Project C',
-        done: false,
-      }, {
-        title: 'Todo D',
-        project: 'Project D',
-        done: false,
-      }],
-    };
-  },
   // тут пишуться методы для роботы с подключенными компонентами
   methods: {
     // этот метод мы подписываем на событие CreateTodoEvent
     // <CreateTodo v-on:CreateTodoEvent="createTodo"></CreateTodo>
     createTodo(newTodo) {
-      this.DataTodos.push(newTodo);
+      store.dispatch('cmpToDo', newTodo);
     },
   },
 };
