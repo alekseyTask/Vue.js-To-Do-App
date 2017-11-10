@@ -48,7 +48,7 @@ export default {
       this.isCreating = false;
     },
     sendForm() {
-      store.dispatch('addToDo', { title: this.titleText, project: this.projectText, done: false, id: 0 });
+      store.dispatch('addToDo', { title: this.titleText, project: this.projectText, completed: false, id: 0 });
       this.titleText = '';
       this.projectText = '';
       this.isCreating = false;

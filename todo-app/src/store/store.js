@@ -35,13 +35,13 @@ export default new Vuex.Store({
     },
     cmp(state, id) {
       const todoIndex = state.DataTodos.map(x => x.id).indexOf(id);
-      this.state.DataTodos[todoIndex].done = true;
+      this.state.DataTodos[todoIndex].completed = true;
     },
-    upd(state, id, newTodo) {
-      const buff = state.DataTodos.find(x => x.id === id);
-      buff.title = newTodo.title;
-      buff.project = newTodo.project;
-      buff.done = newTodo.done;
+    upd(state, todo) {
+      const buff = state.DataTodos.find(x => x.id === todo.id);
+      buff.title = todo.title;
+      buff.project = todo.project;
+      buff.done = todo.done;
     },
     addMany(state, many) {
       this.state.DataTodos = many;
@@ -49,16 +49,20 @@ export default new Vuex.Store({
   },
   actions: {
     addToDo(context, todo) {
+      WebApi.AddTodo(todo);
       context.commit('add', todo);
     },
     delToDo(context, todo) {
+      WebApi.DelTodo(todo.id);
       context.commit('del', todo.id);
     },
     cmpToDo(context, todo) {
       context.commit('cmp', todo.id);
+      WebApi.UpdTodo(todo);
     },
-    updToDo(context, todo, newTodo) {
-      context.commit('upd', todo.id, newTodo);
+    updToDo(context, tudo) {
+      WebApi.UpdTodo(tudo.newTodo);
+      context.commit('upd', tudo.newTodo);
     },
     readToDos(context) {
       WebApi.GetTodos().then(response => context.commit('addMany', response.data));
