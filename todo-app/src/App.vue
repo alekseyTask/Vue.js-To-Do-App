@@ -44,6 +44,9 @@ export default {
     TodoList,
     CreateTodo,
   },
+  created() {
+    store.dispatch('readToDos');
+  },
   // тут пишуться методы для роботы с подключенными компонентами
   methods: {
     // этот метод мы подписываем на событие CreateTodoEvent

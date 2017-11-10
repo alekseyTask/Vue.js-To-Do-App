@@ -1,31 +1,12 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+import WebApi from '../API/todoWebApi';
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    DataTodos: [{
-      title: 'Todo A',
-      project: 'Project A',
-      done: false,
-      id: 1,
-    }, {
-      title: 'Todo B',
-      project: 'Project B',
-      done: true,
-      id: 2,
-    }, {
-      title: 'Todo C',
-      project: 'Project C',
-      done: false,
-      id: 3,
-    }, {
-      title: 'Todo D',
-      project: 'Project D',
-      done: false,
-      id: 4,
-    }],
+    DataTodos: [],
   },
   getters: {
     results(state) {
@@ -41,7 +22,11 @@ export default new Vuex.Store({
   mutations: {
     add(state, todo) {
       const buff = todo;
-      buff.id = state.DataTodos.map(x => x.id).sort().pop() + 1;
+      if (state.DataTodos === undefined || state.DataTodos.length === 0) {
+        buff.id = 1;
+      } else {
+        buff.id = state.DataTodos.map(x => x.id).sort().pop() + 1;
+      }
       this.state.DataTodos.push(buff);
     },
     del(state, id) {
@@ -54,10 +39,12 @@ export default new Vuex.Store({
     },
     upd(state, id, newTodo) {
       const buff = state.DataTodos.find(x => x.id === id);
-
       buff.title = newTodo.title;
       buff.project = newTodo.project;
       buff.done = newTodo.done;
+    },
+    addMany(state, many) {
+      this.state.DataTodos = many;
     },
   },
   actions: {
@@ -72,6 +59,9 @@ export default new Vuex.Store({
     },
     updToDo(context, todo, newTodo) {
       context.commit('upd', todo.id, newTodo);
+    },
+    readToDos(context) {
+      WebApi.GetTodos().then(response => context.commit('addMany', response.data));
     },
   },
 });
