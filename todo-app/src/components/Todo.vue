@@ -25,11 +25,11 @@
         <div class='field'>
           <label>Title</label>
           <!-- Вы можете использовать директиву v-model для двунаправленного связывания данных с элементами форм input и textarea. -->
-          <input type='text' v-model="title" >
+          <input type='text' v-model="some.title" >
         </div>
         <div class='field'>
           <label>Project</label>
-          <input type='text' v-model="project" >
+          <input type='text' v-model="some.project" >
         </div>
         <div class='ui two button attached buttons'>
           <button class='ui basic blue button' v-on:click="hideForm">
@@ -50,18 +50,26 @@
 <script type="text/javascript">
 
   import store from '../store/store';
-
+  
   export default {
     props: ['todo'],
     data() {
-      return { isEditing: false, title: '', project: '' };
+      // return { isEditing: false, title: this.todo.title, project: this.todo.project };
+      return { isEditing: false,
+        some: { title: this.todo.title,
+          project: this.todo.project,
+          completed: this.todo.completed,
+          id: this.todo.id } };
     },
     methods: {
       showForm() {
         this.isEditing = true;
       },
       hideForm() {
-        store.dispatch('updToDo', { oldTudo: this.todo, newTodo: { title: this.title, project: this.project, completed: this.todo.completed, id: this.todo.id } });
+     // store.dispatch('updToDo', { oldTudo: this.todo, newTodo:
+     // { title: this.title, project: this.project,
+     // completed: this.todo.completed, id: this.todo.id } });
+        store.dispatch('updToDo', { oldTudo: this.todo, newTodo: this.some });
         this.isEditing = false;
       },
       deleteTodo(todo) {

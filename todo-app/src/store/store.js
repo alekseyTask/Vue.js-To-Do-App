@@ -21,13 +21,7 @@ export default new Vuex.Store({
   },
   mutations: {
     add(state, todo) {
-      const buff = todo;
-      if (state.DataTodos === undefined || state.DataTodos.length === 0) {
-        buff.id = 1;
-      } else {
-        buff.id = state.DataTodos.map(x => x.id).sort().pop() + 1;
-      }
-      this.state.DataTodos.push(buff);
+      this.state.DataTodos.push(todo);
     },
     del(state, id) {
       const todoIndex = state.DataTodos.map(x => x.id).indexOf(id);
@@ -49,8 +43,7 @@ export default new Vuex.Store({
   },
   actions: {
     addToDo(context, todo) {
-      WebApi.AddTodo(todo);
-      context.commit('add', todo);
+      WebApi.AddTodo(todo).then(response => context.commit('add', response.data));
     },
     delToDo(context, todo) {
       WebApi.DelTodo(todo.id);
