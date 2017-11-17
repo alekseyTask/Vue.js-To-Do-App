@@ -4,10 +4,15 @@ import axios from 'axios';
 // const pathDel = 'https://jsonplaceholder.typicode.com/todos/';
 // const pathUpd = 'https://jsonplaceholder.typicode.com/todos/';
 
-const pathTodo = 'http://localhost:54933/api/Todo';
-const pathDel = 'http://localhost:54933/api/Todo/';
-const pathUpd = 'http://localhost:54933/api/Todo/';
-const pathAdd = 'http://localhost:54933/api/Todo/';
+// const pathTodo = 'http://localhost:54933/api/Todo';
+// const pathDel = 'http://localhost:54933/api/Todo/';
+// const pathUpd = 'http://localhost:54933/api/Todo/';
+// const pathAdd = 'http://localhost:54933/api/Todo/';
+
+const pathTodo = 'http://192.168.1.116:8082/WebApi/api/Todo';
+const pathDel = 'http://192.168.1.116:8082/WebApi/api/Todo/';
+const pathUpd = 'http://192.168.1.116:8082/WebApi/api/Todo/';
+const pathAdd = 'http://192.168.1.116:8082/WebApi/api/Todo/';
 
 export default {
   GetTodos() { return axios.get(pathTodo); },
